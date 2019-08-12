@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1565273024193.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3375249980",
+    "id" : "9FFFBC2D",
+    "lastKnownWriteTime" : 1565019832,
+    "last_content_update" : 1565019832,
+    "path" : "~/Desktop/treemisc/R/mushroom.R",
+    "project_path" : "R/mushroom.R",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 9,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

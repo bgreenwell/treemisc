@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1565271105821.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "70D24AE0",
+    "lastKnownWriteTime" : 1565271403,
+    "last_content_update" : 1565271403968,
+    "path" : "~/Desktop/treemisc/R/is_root.R",
+    "project_path" : "R/is_root.R",
+    "properties" : {
+        "cursorPosition" : "41,37",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
