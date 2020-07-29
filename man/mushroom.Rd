@@ -4,7 +4,9 @@
 \name{mushroom}
 \alias{mushroom}
 \title{Mushroom edibility}
-\format{A data frame with 8124 rows and 23 variables.}
+\format{
+A data frame with 8124 rows and 23 variables.
+}
 \source{
 Knopf, Alfred A. \emph{The Audubon Society Field Guide to North American
 Mushrooms}, G. H. Lincoff (Pres.), 1981.

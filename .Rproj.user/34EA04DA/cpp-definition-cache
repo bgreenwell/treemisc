@@ -3,7 +3,7 @@
         "definitions" : [
             {
                 "column" : 15,
-                "file" : "/Users/b780620/Desktop/treemisc/src/proximity.cpp",
+                "file" : "/Users/b780620/Desktop/devel/treemisc/src/proximity.cpp",
                 "kind" : 6,
                 "line" : 5,
                 "name" : "proximity_cpp(IntegerMatrix)",
@@ -11,7 +11,7 @@
                 "usr" : "c:@F@proximity_cpp#$@N@Rcpp@S@Matrix>#VI13#@N@Rcpp@ST>1#T@PreserveStorage#"
             }
         ],
-        "file" : "/Users/b780620/Desktop/treemisc/src/proximity.cpp",
+        "file" : "/Users/b780620/Desktop/devel/treemisc/src/proximity.cpp",
         "file_last_write" : 1565263539.000000
     }
 ]

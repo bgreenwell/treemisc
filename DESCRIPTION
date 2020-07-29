@@ -4,7 +4,7 @@ Title: Data Sets and Functions to Accompany Tree-Based Methods and their Applica
 Version: 0.0.1
 Authors@R: person("Brandon", "Greenwell", email = "greenwell.brandon@gmail.com", role =
          c("aut", "cre"), comment = c(ORCID = "0000-0002-8120-0084"))
-Description: Miscellaneous data sets and functions to support 'Tree-based methods and their application in R.'
+Description: Miscellaneous data sets and functions to accompany 'Tree-based methods and their application in R.'
 License: GPL (>= 2)
 Depends: R (>= 2.10)
 Imports: 
@@ -20,5 +20,5 @@ Suggests:
     rpart,
     tinytest
 LinkingTo: Rcpp
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 LazyData: TRUE

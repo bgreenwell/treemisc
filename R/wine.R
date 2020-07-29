@@ -1,0 +1,47 @@
+#' Wine quality
+#'
+#' These data are related to red and white variants of the Portuguese "Vinho 
+#' Verde" wine. For details, see Cortez et al. (2009). Due to privacy and 
+#' logistic issues, only physicochemical (inputs) and sensory (the output) 
+#' variables are available (e.g., there is no data about grape types, wine 
+#' brand, wine selling price, etc.). These data can be used for classification 
+#' or regression tasks. The classes are ordered and not balanced (e.g., there 
+#' are many more normal wines than excellent or poor ones). Outlier detection 
+#' algorithms could be used to detect the few excellent or poor wines. Also, it 
+#' is not known if all input variables are relevant. So it could be interesting 
+#' to test feature selection methods.
+#'
+#' @docType data
+#'
+#' @keywords datasets
+#'
+#' @format A data frame with 6497 rows and 13 variables.
+#' 
+#' @details 
+#' 
+#' \describe{
+#' 
+#' \item{fixed.acidity}{Input feature (continuous).}
+#' \item{volatile.acidity}{Input feature (continuous).}
+#' \item{citric.acid}{Input feature (continuous).}
+#' \item{residual.sugar}{Input feature (continuous).}
+#' \item{chlorides}{Input feature (continuous).}
+#' \item{free.sulfur.dioxide}{Input feature (continuous).}
+#' \item{total.sulfur.dioxide}{Input feature (continuous).}
+#' \item{density}{Input feature (continuous).}
+#' \item{pH}{Input feature (continuous).}
+#' \item{sulphates}{Input feature (continuous).}
+#' \item{alcohol}{Input feature (continuous).}
+#' \item{quality}{Target variable (continuous).}
+#' \item{type}{Input feature specifying whether it's a red or white wine 
+#' (factor).}
+#' 
+#' }
+#'
+#' @name wine
+#'
+#' @source
+#' P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J. Reis. 
+#' Modeling wine preferences by data mining from physicochemical properties. 
+#' In Decision Support Systems, Elsevier, 47(4):547-553, 2009.
+NULL
