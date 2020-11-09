@@ -6,7 +6,7 @@ Authors@R: person("Brandon", "Greenwell", email = "greenwell.brandon@gmail.com",
          c("aut", "cre"), comment = c(ORCID = "0000-0002-8120-0084"))
 Description: Miscellaneous data sets and functions to accompany 'Tree-based methods and their application in R.'
 License: GPL (>= 2)
-Depends: R (>= 2.10)
+Depends: R (>= 4.0.0)
 Imports: 
     Matrix, 
     Rcpp (>= 1.0.1),

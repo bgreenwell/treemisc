@@ -15,7 +15,7 @@ cost-complexity parameter is returned instead.}
 
 \item{se}{Numeric specifying the number of standard errors to use when 
 pruning the tree. Default is \code{1}, which corresponds to the 1-SE rule
-described in Breimanet al. (1984).}
+described in Breiman et al. (1984).}
 }
 \value{
 Either an object that inherits from class \code{"rpart"} (ideally, 

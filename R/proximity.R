@@ -17,6 +17,10 @@
 #' matrix should be sparse. If \code{NULL} (the default) it is made sparse when 
 #' more than half the entries are 0.
 #' 
+#' @param upper Logical indicating whether or not to return the proximities in
+#' upper triangular form (\code{TRUE}) or as a symmetric matrix (\code{FALSE}).
+#' Default is \code{TRUE}.
+#' 
 #' @param ... Additional optional argument. (Currently ignored.)
 #' 
 #' @useDynLib treemisc, .registration = TRUE
@@ -32,7 +36,7 @@ proximity <- function(x, ...) {
 #' @rdname proximity
 #' 
 #' @export
-proximity.default <- function(x, sparse = NULL, ...) {
+proximity.default <- function(x, sparse = NULL, upper = TRUE, ...) {
   stop("x should be a \"ranger\" object or a matrix.")
 }
 
@@ -40,21 +44,24 @@ proximity.default <- function(x, sparse = NULL, ...) {
 #' @rdname proximity
 #' 
 #' @export
-proximity.matrix <- function(x, sparse = NULL, ...) {
+proximity.matrix <- function(x, sparse = NULL, upper = TRUE, ...) {
   prox <- proximity_cpp(x)
   diag(prox) <- 1
-  if (isFALSE(sparse)) {
-    prox
-  } else {
-    Matrix::Matrix(prox, sparse = NULL)
+  if (isFALSE(upper)) {
+    prox <- t(prox) + prox
+    diag(prox) <- 1
+  } 
+  if (!isFALSE(sparse)) {
+    prox <- Matrix::Matrix(prox, sparse = sparse)
   }
+  prox
 }
 
 
 #' @rdname proximity
 #' 
 #' @export
-proximity.ranger <- function(x, data = NULL, sparse = NULL, ...) {
+proximity.ranger <- function(x, data = NULL, sparse = NULL, upper = TRUE, ...) {
   
   # Error message to display when training data cannot be extracted form x
   msg <- paste0(

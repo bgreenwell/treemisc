@@ -11,7 +11,7 @@
 #' 
 #' @param se Numeric specifying the number of standard errors to use when 
 #' pruning the tree. Default is \code{1}, which corresponds to the 1-SE rule
-#' described in Breimanet al. (1984).
+#' described in Breiman et al. (1984).
 #' 
 #' @return Either an object that inherits from class \code{"rpart"} (ideally, 
 #' one that's been simplified using cost-complexity pruning with the 1-SE rule)
