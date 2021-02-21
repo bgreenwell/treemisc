@@ -1,6 +1,6 @@
 Package: treemisc
 Type: Package
-Title: Data Sets and Functions to Accompany Tree-Based Methods and their Application in R
+Title: Data Sets and Functions to Accompany Tree-Based Methods and their Application in R (forthcoming)
 Version: 0.0.1
 Authors@R: person("Brandon", "Greenwell", email = "greenwell.brandon@gmail.com", role =
          c("aut", "cre"), comment = c(ORCID = "0000-0002-8120-0084"))
@@ -16,9 +16,11 @@ Suggests:
     graphics,
     party,
     partykit,
+    randomForest,
     ranger, 
     rpart,
     tinytest
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 LazyData: TRUE
+Encoding: UTF-8

@@ -20,6 +20,8 @@
 #'
 #'   \item{\code{"ns"}}{Natural (i.e., restricted) cubic splines; essentially,
 #'   a spline-based nonparametric version of Pratt scaling.}
+#'   
+#'   \item{\code{"binned"}}{TBD.}
 #'
 #' }
 #'
@@ -73,8 +75,9 @@
 #' @rdname calibrate
 #'
 #' @export
-calibrate <- function(prob, y, method = c("pratt", "iso", "ns"),
-                      pos.class = NULL, probs = c(0.05, 0.35, 0.65, 0.95)) {
+calibrate <- function(prob, y, method = c("pratt", "iso", "ns", "bins"), 
+                      pos.class = NULL, probs = c(0.05, 0.35, 0.65, 0.95),
+                      nbins = 10) {
   if (!all(sort(unique(y)) == c(0, 1))) {
     if (is.null(pos.class)) {
       stop("A value for `pos.class` is required whenever `y` is not a 0/1 ",
@@ -104,9 +107,14 @@ calibrate <- function(prob, y, method = c("pratt", "iso", "ns"),
     }
     prob <- prob[ind]
     prob.cal <- cal[["fitted.values"]]
-  } else {
+  } else if (method == "iso") {
     cal <- isoreg(prob, y)
     prob.cal <- cal$yf
+  } else {
+    # FIXME: How to return output?
+    prob.cut <- cut(x, breaks = seq(from = 0, to = 1, length = nbins + 1), 
+                    include.lowest = TRUE)
+    prob.cal <- tapply(y, INDEX = prob.cut, FUN = mean)
   }
   probs <- data.frame("original" = prob, "calibrated" = prob.cal)
   structure(list("probs" = probs, "calibrater" = cal, "bs" = bs),

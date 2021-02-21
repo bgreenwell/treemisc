@@ -9,11 +9,11 @@
 \usage{
 proximity(x, ...)
 
-\method{proximity}{default}(x, sparse = NULL, ...)
+\method{proximity}{default}(x, sparse = NULL, upper = TRUE, ...)
 
-\method{proximity}{matrix}(x, sparse = NULL, ...)
+\method{proximity}{matrix}(x, sparse = NULL, upper = TRUE, ...)
 
-\method{proximity}{ranger}(x, data = NULL, sparse = NULL, ...)
+\method{proximity}{ranger}(x, data = NULL, sparse = NULL, upper = TRUE, ...)
 }
 \arguments{
 \item{x}{Either a \code{\link[ranger]{ranger}} object or a matrix of matrix 
@@ -25,6 +25,10 @@ each tree in the forest).}
 \item{sparse}{Logical or \code{NULL} indicating whether or not the resulting 
 matrix should be sparse. If \code{NULL} (the default) it is made sparse when 
 more than half the entries are 0.}
+
+\item{upper}{Logical indicating whether or not to return the proximities in
+upper triangular form (\code{TRUE}) or as a symmetric matrix (\code{FALSE}).
+Default is \code{TRUE}.}
 
 \item{data}{Optional data frame passed on to 
 \code{\link[ranger]{predict.ranger}}. It's a good idea to pass the data via 

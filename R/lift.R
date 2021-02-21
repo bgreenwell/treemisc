@@ -78,23 +78,27 @@ lift <- function(prob, y, pos.class = NULL, cumulative = TRUE, nbins = 0) {
   } else {
     (cumsum(y) / seq_along(y)) / mean(y)
   }
-  structure(list("lift" = lift, "prop" = prop, "cumulative" = cumulative),
-            class = "lift")
+  structure(list("lift" = lift, "prop" = prop, "cumulative" = cumulative,
+                 "y" = y), class = "lift")
 }
 
 
 #' @rdname lift
 #'
 #' @export
-plot.lift <- function(x, refline.col = "red", refline.lty = "dashed",
-                      refline.lwd = 1, ...) {
+plot.lift <- function(x, refline = TRUE, refline.col = "red", 
+                      refline.lty = "dashed", refline.lwd = 1, ...) {
   if (isTRUE(x[["cumulative"]])) {
     plot(x[["prop"]], x[["lift"]], type = "l", xlab = "Proportion of cases",
          ylab = "Cumulative lift", ...)
-    abline(0, max(x[["lift"]]), col = refline.col, lty = refline.lty,
-           lwd = refline.lwd)
-    legend("bottomright", legend = "Baseline", lty = 2, col = "red",
-           bty = "n")
+    if (isTRUE(refline)) {
+      maxy <- sum(x$y)
+      polygon(c(0, mean(x$y), 1), c(0, maxy, maxy), col = "grey")
+      #abline(0, 1, col = refline.col, lty = refline.lty,
+      #       lwd = refline.lwd)
+      legend("bottomright", legend = "Baseline", lty = 2, col = "red",
+             bty = "n")
+    }
   } else {
     plot(x[["prop"]], x[["lift"]], type = "l", xlab = "Proportion of cases",
          ylab = "Lift", ...)
