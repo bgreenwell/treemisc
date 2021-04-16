@@ -15,6 +15,8 @@
 #' 
 #' @source https://www.jmlr.org/papers/volume17/blaser16a/blaser16a.pdf.
 #' 
+#' @importFrom stats rnorm
+#' 
 #' @export
 #' 
 #' @examples 

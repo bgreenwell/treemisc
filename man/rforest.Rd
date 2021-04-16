@@ -29,8 +29,8 @@ results in a traditional random forest.}
 \code{\link[randomForest]{randomForest}} (e.g., \code{nodesize = 10}).}
 }
 \description{
-A poor man's implementation of random forests (Breiman, 2001) with the option
-of random rotations as described in Blaser and Fryzlewicz (2016).
+A poor man's implementation of random forest (Breiman, 2001) with the option
+to incorporate random rotations as described in Blaser and Fryzlewicz (2016).
 }
 \references{
 Breiman, Leo. (2001), Random Forests, Machine Learning 45(1), 5-32.

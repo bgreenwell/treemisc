@@ -88,8 +88,8 @@ predict.rftree <- function(object, newX) {
 
 #' Random forest
 #' 
-#' A poor man's implementation of random forests (Breiman, 2001) with the option
-#' of random rotations as described in Blaser and Fryzlewicz (2016).
+#' A poor man's implementation of random forest (Breiman, 2001) with the option
+#' to incorporate random rotations as described in Blaser and Fryzlewicz (2016).
 #' 
 #' @param X A data frame or a matrix of predictors.
 #' 
@@ -155,11 +155,13 @@ rforest <- function(X, y, mtry = NULL, ntree = 500, rotate = FALSE, ...) {
 #' for each individual tree. Default is \code{FALSE}, which only returns the 
 #' aggregated predictions.
 #' 
+#' @param ... Additional optional arguments. (Currently ignored.)
+#' 
 #' @return A vector of predictions. For binary outcomes coded as 0/1, the 
 #' predictions represent Pr(Y = 1).
 #' 
 #' @export
-predict.rforest <- function(object, newX, predict.all = FALSE) {
+predict.rforest <- function(object, newX, predict.all = FALSE, ...) {
   p <- lapply(object, FUN = function(tree) {
     predict.rftree(tree, newX = newX)
   })

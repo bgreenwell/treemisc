@@ -10,7 +10,7 @@ lift(prob, y, pos.class = NULL, cumulative = TRUE, nbins = 0)
 \method{plot}{lift}(
   x,
   refline = TRUE,
-  refline.col = "red",
+  refline.col = 2,
   refline.lty = "dashed",
   refline.lwd = 1,
   ...
@@ -38,6 +38,8 @@ lift. Default is 0, which corresponds to no binning. For example, setting
 sorted probabilities.}
 
 \item{x}{An object of class \code{"lift"}.}
+
+\item{refline}{Logical indicating whether or not to include a reference line.}
 
 \item{refline.col}{The color to use for the reference line. Default is
 \code{"red"}.}

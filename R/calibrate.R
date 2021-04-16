@@ -35,6 +35,11 @@
 #' locations defining the spline whenever \code{method = "ns"}. The default
 #' corresponds to a good choice based on four knots; see
 #' Harrel (2015, pp. 26-28) for details.
+#' 
+#' @param nbins Integer specifying the number of bins to use for grouping the
+#' probabilities.
+#' 
+#' @param refline Logical indicating whether or not to include a reference line.
 #'
 #' @param refline.col The color to use for the reference line. Default is
 #' \code{"red"}.
@@ -112,7 +117,7 @@ calibrate <- function(prob, y, method = c("pratt", "iso", "ns", "bins"),
     prob.cal <- cal$yf
   } else {
     # FIXME: How to return output?
-    prob.cut <- cut(x, breaks = seq(from = 0, to = 1, length = nbins + 1), 
+    prob.cut <- cut(prob, breaks = seq(from = 0, to = 1, length = nbins + 1), 
                     include.lowest = TRUE)
     prob.cal <- tapply(y, INDEX = prob.cut, FUN = mean)
   }
@@ -137,12 +142,14 @@ print.calibrate <- function(x, ...) {
 #' @rdname calibrate
 #'
 #' @export
-plot.calibrate <- function(x, refline.col = "red", refline.lty ="dashed",
-                           refline.lwd = 1, ...) {
-  plot(x$probs[["original"]], x$probs[["calibrated"]], type = "l",
+plot.calibrate <- function(x, refline = TRUE, refline.col = 2, 
+                           refline.lty = "dashed", refline.lwd = 1, ...) {
+  plot(x$probs[["original"]], x$probs[["calibrated"]], type = "l", 
        xlab = "Original probabilities", ylab = "Calibrated probabilities", ...)
-  abline(0, 1, col = refline.col, lty = refline.lty, lwd = refline.lwd)
-  legend("topleft", legend = "Perfectly calibrated", lty = 2, col = "red",
-         bty = "n")
+  if (isTRUE(refline)) {
+    abline(0, 1, col = refline.col, lty = refline.lty, lwd = refline.lwd)
+    legend("topleft", legend = "Perfectly calibrated", lty = 2, col = refline.col,
+           bty = "n")
+  }  
   invisible()
 }

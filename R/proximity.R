@@ -113,6 +113,6 @@ proximity.ranger <- function(x, data = NULL, sparse = NULL, upper = TRUE, ...) {
                       type = "terminalNodes")
   
   # Compute proximity matrix
-  proximity.matrix(p$predictions, sparse = sparse)
+  proximity.matrix(p$predictions, sparse = sparse, upper = upper)
 
 }

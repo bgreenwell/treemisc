@@ -4,7 +4,7 @@
 \alias{predict.rforest}
 \title{Random forest predictions}
 \usage{
-\method{predict}{rforest}(object, newX, predict.all = FALSE)
+\method{predict}{rforest}(object, newX, predict.all = FALSE, ...)
 }
 \arguments{
 \item{object}{An object of class \code{"rftree"}.}
@@ -14,6 +14,8 @@
 \item{predict.all}{Logical indicating whether or not to return predictions
 for each individual tree. Default is \code{FALSE}, which only returns the 
 aggregated predictions.}
+
+\item{...}{Additional optional arguments. (Currently ignored.)}
 }
 \value{
 A vector of predictions. For binary outcomes coded as 0/1, the 

@@ -17,7 +17,14 @@ calibrate(
 
 \method{print}{calibrate}(x, ...)
 
-\method{plot}{calibrate}(x, refline.col = "red", refline.lty = "dashed", refline.lwd = 1, ...)
+\method{plot}{calibrate}(
+  x,
+  refline = TRUE,
+  refline.col = 2,
+  refline.lty = "dashed",
+  refline.lwd = 1,
+  ...
+)
 }
 \arguments{
 \item{prob}{Vector of predicted probabilities.}
@@ -53,9 +60,14 @@ locations defining the spline whenever \code{method = "ns"}. The default
 corresponds to a good choice based on four knots; see
 Harrel (2015, pp. 26-28) for details.}
 
+\item{nbins}{Integer specifying the number of bins to use for grouping the
+probabilities.}
+
 \item{x}{An object of class \code{"calibrate"}.}
 
 \item{...}{Additional optional argument to be passed on to other methods.}
+
+\item{refline}{Logical indicating whether or not to include a reference line.}
 
 \item{refline.col}{The color to use for the reference line. Default is
 \code{"red"}.}
