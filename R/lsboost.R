@@ -85,10 +85,11 @@ lsboost <- function(X, y, ntree = 100, shrinkage = 0.1, depth = 6,
 #' @export
 print.lsboost <- function(x, ...) {
   cat("Gradient tree boosting with least squares loss", "\n")
-  cat("Number of trees: ", length(x$trees), "\n")
+  cat("            Initial fit: ", x$init[1L], "\n")
+  cat("        Number of trees: ", length(x$trees), "\n")
   cat("Shrinkage/learning rate: ", x$shrinkage, "\n")
-  cat("Maximum tree depth: ", x$depth, "\n")
-  cat("Row subsample rate: ", x$subsample, "\n")
+  cat("     Maximum tree depth: ", x$depth, "\n")
+  cat("     Row subsample rate: ", x$subsample, "\n")
 }
 
 
