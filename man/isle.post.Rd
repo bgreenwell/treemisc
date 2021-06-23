@@ -52,6 +52,17 @@ corresponds to no offset.}
 \item{...}{Additional (optional) arguments to be passed on to 
 \code{\link[glmnet]{glmnet}} (e.g., \code{intercept = FALSE}).}
 }
+\value{
+A list with two components:
+\describe{
+  \item{\code{results}}{A data frame with one row for each value of lambda in
+  the coefficient path and columns giving the corresponding number of 
+  trees/non-zero coefficients, error metric(s), and the corresponding value 
+  of lambda.}
+  \item{lasso.fit}{The fitted \code{\link[glmnet]{glmnet}} or 
+  \code{\link[glmnet]{cv.glmnet}} object.}
+}
+}
 \description{
 Use the LASSO (Least Absolute Shrinkage and Selection Operator) to 
 post-process the predictions from the individual trees of a tree-based 

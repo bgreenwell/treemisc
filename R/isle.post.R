@@ -38,6 +38,16 @@
 #' @param ... Additional (optional) arguments to be passed on to 
 #' \code{\link[glmnet]{glmnet}} (e.g., \code{intercept = FALSE}).
 #' 
+#' @return A list with two components:
+#' \describe{
+#'   \item{\code{results}}{A data frame with one row for each value of lambda in
+#'   the coefficient path and columns giving the corresponding number of 
+#'   trees/non-zero coefficients, error metric(s), and the corresponding value 
+#'   of lambda.}
+#'   \item{lasso.fit}{The fitted \code{\link[glmnet]{glmnet}} or 
+#'   \code{\link[glmnet]{cv.glmnet}} object.}
+#' }
+#' 
 #' @export
 isle.post <- function(X, y, newX = NULL, newy = NULL, cv = FALSE, nfolds = 5, 
                       family = NULL, loss = "default", offset = NULL, ...) {
@@ -78,6 +88,7 @@ isle.post <- function(X, y, newX = NULL, newy = NULL, cv = FALSE, nfolds = 5,
   }
 
   # Return results ordered by number of trees/non-zero coefficients
-  res[order(res[["ntree"]], decreasing = FALSE), ]
+  list("results" = res[order(res[["ntree"]], decreasing = FALSE), ],
+       "lasso.fit" = fit)
   
 }
