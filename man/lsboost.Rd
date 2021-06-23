@@ -6,11 +6,19 @@
 \alias{predict.lsboost}
 \title{Gradient tree boosting with least squares loss}
 \usage{
-lsboost(X, y, ntree = 100, shrinkage = 0.1, depth = 6, subsample = 0.5)
+lsboost(
+  X,
+  y,
+  ntree = 100,
+  shrinkage = 0.1,
+  depth = 6,
+  subsample = 0.5,
+  init = mean(y)
+)
 
 \method{print}{lsboost}(x, ...)
 
-\method{predict}{lsboost}(object, newdata, ntree = NULL, ...)
+\method{predict}{lsboost}(object, newdata, ntree = NULL, individual = FALSE, ...)
 }
 \arguments{
 \item{X}{A data frame of only predictors.}
@@ -27,6 +35,9 @@ Defaults to using all the trees in the ensemble.}
 \item{subsample}{Numeric specifying the proportion of the training data to
 randomly sample before building each tree. Default is \code{0.5}.}
 
+\item{init}{Numeric specifying the initial value to boost from. Defaults to
+the mean response (i.e., \code{mean(y)}).}
+
 \item{x}{An object of class \code{"lsboost"}.}
 
 \item{...}{Additional optional arguments. (Currently ignored.)}
@@ -34,6 +45,10 @@ randomly sample before building each tree. Default is \code{0.5}.}
 \item{object}{An object of class \code{"lsboost"}.}
 
 \item{newdata}{Data frame of new observations for making predictions.}
+
+\item{individual}{Logical indicating whether or not to return the (shrunken)
+predictions from each tree individually (\code{TRUE}) or the overall ensemble
+prediction (\code{FALSE}). Default is \code{FALSE}.}
 }
 \value{
 An object of class \code{"lsboost"} which is just a list with the 
@@ -47,7 +62,8 @@ following components:
   \item \code{init} The initial constant fit.
 }
 
-A vector of predictions.
+A vector (\code{individual = TRUE}) or matrix 
+(\code{individual = FALSE}) of predictions.
 }
 \description{
 A poor-man's implementation of stochastic gradient tree boosting with least 

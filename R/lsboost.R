@@ -16,6 +16,9 @@
 #' @param subsample Numeric specifying the proportion of the training data to
 #' randomly sample before building each tree. Default is \code{0.5}.
 #' 
+#' @param init Numeric specifying the initial value to boost from. Defaults to
+#' the mean response (i.e., \code{mean(y)}).
+#' 
 #' @return An object of class \code{"lsboost"} which is just a list with the 
 #' following components:
 #' \itemize{
@@ -48,13 +51,13 @@
 #' pred <- predict(bst, newdata = tst)
 #' mean((pred - tst$y) ^ 2)
 lsboost <- function(X, y, ntree = 100, shrinkage = 0.1, depth = 6, 
-                    subsample = 0.5) {
+                    subsample = 0.5, init = mean(y)) {
   # Check for dependencies
   if (!requireNamespace("rpart", quietly = TRUE)) {
     stop("Package \"rpart\" needed for this function to work. Please ",
          "install it.", call. = FALSE)
   }
-  init <- yhat <- rep(mean(y), times = nrow(X))  # initialize fit
+  yhat <- rep(init, times = nrow(X))  # initialize fit
   trees <- vector("list", length = ntree)  # to store each tree
   ctrl <- rpart::rpart.control(cp = 0, maxdepth = depth, minbucket = 10)
   for (tree in seq_len(ntree)) {
@@ -103,26 +106,32 @@ print.lsboost <- function(x, ...) {
 #' 
 #' @param ntree Integer specifying the number of trees in the ensemble to use.
 #' Defaults to using all the trees in the ensemble.
+#'
+#' @param individual Logical indicating whether or not to return the (shrunken)
+#' predictions from each tree individually (\code{TRUE}) or the overall ensemble
+#' prediction (\code{FALSE}). Default is \code{FALSE}.
 #' 
 #' @param ... Additional optional arguments. (Currently ignored.)
 #' 
-#' @return A vector of predictions.
+#' @return A vector (\code{individual = TRUE}) or matrix 
+#' (\code{individual = FALSE}) of predictions.
 #'
 #' @rdname lsboost
 #' 
 #' @export
-predict.lsboost <- function(object, newdata, ntree = NULL, ...) {
+predict.lsboost <- function(object, newdata, ntree = NULL, 
+                            individual = FALSE, ...) {
   if (is.null(ntree)) {
     ntree <- length(object[["trees"]])
   }
   shrinkage <- object[["shrinkage"]]
-  pmat <- sapply(object[["trees"]], FUN = function(tree) {
-    shrinkage * predict(tree, newdata = newdata)
-  })
-  rowSums(pmat[, seq_len(ntree), drop = FALSE])
   trees <- object[["trees"]][seq_len(ntree)]
   pmat <- sapply(trees, FUN = function(tree) {
     shrinkage * predict(tree, newdata = newdata)
   })
-  rowSums(pmat) + object$init
+  if (isTRUE(individual)) {
+    pmat
+  } else {
+    rowSums(pmat) + object$init
+  }
 }
