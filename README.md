@@ -4,24 +4,19 @@
 # treemisc
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
-Miscellaneous data sets and functions to accompany An Introduction to
-Tree-Based Methods with Examples in R
+Miscellaneous data sets and functions to accompany *An Introduction to
+Tree-Based Methods (with Examples in R)*, a forthcoming title to be
+published by [Chapman & Hall/CRC Data Science
+Series](https://www.routledge.com/Chapman--HallCRC-Data-Science-Series/book-series/CHDSS).
 
 ## Installation
 
-You can install the released version of treemisc from
-[CRAN](https://CRAN.R-project.org) with:
+You can install the development version of **treemisc** from
+[GitHub](https://github.com/) with:
 
 ``` r
-install.packages("treemisc")
-```
-
-And the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("bgreenwell/treemisc")
+# install.packages("remotes")
+remotes::install_github("bgreenwell/treemisc")
 ```
