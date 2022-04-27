@@ -29,26 +29,26 @@
 #' @return A data frame representing the Cartesian product between equally
 #' spaced values from each variable.
 #' 
-#' @rdname xy.grid
+#' @rdname xy_grid
 #' 
 #' @export
 #'
 #' @examples
 #' x1 <- 1:3
 #' x2 <- letters[1L:3L]
-#' xy.grid(x1, x2, gr = 3, col.names = c("x1", "x2"))  # will have 3^2=9 rows
-#' xy.grid(m <- cbind(x1, x2), gr = 3)     # equivalent
-#' xy.grid(d <- as.data.frame(m), gr = 3)  # equivalent
-#' xy.grid(x2 ~ x1, data = d, gr = 3)      # equivalent
-xy.grid <- function(x, ...) {
-  UseMethod("xy.grid")
+#' xy_grid(x1, x2, gr = 3, col.names = c("x1", "x2"))  # will have 3^2=9 rows
+#' xy_grid(m <- cbind(x1, x2), gr = 3)     # equivalent
+#' xy_grid(d <- as.data.frame(m), gr = 3)  # equivalent
+#' xy_grid(x2 ~ x1, data = d, gr = 3)      # equivalent
+xy_grid <- function(x, ...) {
+  UseMethod("xy_grid")
 }
 
 
-#' @rdname xy.grid
+#' @rdname xy_grid
 #' 
 #' @export
-xy.grid.default <- function(x, y, grid.resolution = 51, col.names = NULL, ...) {
+xy_grid.default <- function(x, y, grid.resolution = 51, col.names = NULL, ...) {
   # TODO: Let x and/or y be non-numeric
   x.seq <- if (is.numeric(x)) {
     seq(from = min(x), to = max(x), length = grid.resolution)
@@ -66,10 +66,10 @@ xy.grid.default <- function(x, y, grid.resolution = 51, col.names = NULL, ...) {
 }
 
 
-#' @rdname xy.grid
+#' @rdname xy_grid
 #' 
 #' @export
-xy.grid.formula <- function(x, data, grid.resolution = 51, ...) {
+xy_grid.formula <- function(x, data, grid.resolution = 51, ...) {
   m <- match.call(expand.dots = FALSE)
   eframe <- parent.frame()
   md <- eval(m$data, envir = eframe)
@@ -77,25 +77,25 @@ xy.grid.formula <- function(x, data, grid.resolution = 51, ...) {
     md <- as.data.frame(data)
   }
   var.names <- all.vars(x)
-  xy.grid.default(md[[var.names[2L]]], y = md[[var.names[1L]]],
+  xy_grid.default(md[[var.names[2L]]], y = md[[var.names[1L]]],
                   grid.resolution = grid.resolution,
                   col.names = var.names[2L:1L])
 }
 
 
-#' @rdname xy.grid
+#' @rdname xy_grid
 #' 
 #' @export
-xy.grid.matrix <- function(x, grid.resolution = 51, ...) {
-  xy.grid.default(x[, 1L], y = x[, 2L], grid.resolution = grid.resolution,
+xy_grid.matrix <- function(x, grid.resolution = 51, ...) {
+  xy_grid.default(x[, 1L], y = x[, 2L], grid.resolution = grid.resolution,
                   col.names = colnames(x)[1L:2L])
 }
 
 
-#' @rdname xy.grid
+#' @rdname xy_grid
 #' 
 #' @export
-xy.grid.data.frame <- function(x, grid.resolution = 51, ...) {
-  xy.grid.default(x[[1L]], y = x[[2L]], grid.resolution = grid.resolution,
+xy_grid.data.frame <- function(x, grid.resolution = 51, ...) {
+  xy_grid.default(x[[1L]], y = x[[2L]], grid.resolution = grid.resolution,
                   col.names = names(x)[1L:2L])
 }

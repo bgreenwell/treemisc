@@ -1,6 +1,6 @@
-#' Gradient tree boosting with least squares (LS) loss
+#' Gradient tree boosting with least absolute deviation (LAD) loss
 #' 
-#' A poor-man's implementation of stochastic gradient tree boosting with LS 
+#' A poor-man's implementation of stochastic gradient tree boosting with LAD 
 #' loss.
 #' 
 #' @param X A data frame of only predictors.
@@ -17,9 +17,9 @@
 #' randomly sample before building each tree. Default is \code{0.5}.
 #' 
 #' @param init Numeric specifying the initial value to boost from. Defaults to
-#' the mean response (i.e., \code{mean(y)}).
+#' the median response (i.e., \code{median(y)}).
 #' 
-#' @return An object of class \code{"lsboost"} which is just a list with the 
+#' @return An object of class \code{"ladboost"} which is just a list with the 
 #' following components:
 #' \itemize{
 #'   \item \code{trees} A list of length \code{ntree} containing the individual 
@@ -33,9 +33,11 @@
 #' @note 
 #' By design, the final model does not include the predictions from the initial
 #' (constant) fit. So the constant is stored in the \code{init} component of the
-#' returned output to be used later by \code{predict.lsboost()}.
+#' returned output to be used later by \code{predict.ladboost()}.
+#' 
+#' @importFrom stats median
 #'
-#' @rdname lsboost
+#' @rdname ladboost
 #' 
 #' @export
 #' 
@@ -47,42 +49,51 @@
 #' 
 #' # Gradient boosted decision trees
 #' set.seed(1027)  # for reproducibility
-#' bst <- lsboost(subset(trn, select = -y), y = trn$y, depth = 2)
+#' bst <- ladboost(subset(trn, select = -y), y = trn$y, depth = 2)
 #' pred <- predict(bst, newdata = tst)
 #' mean((pred - tst$y) ^ 2)
-lsboost <- function(X, y, ntree = 100, shrinkage = 0.1, depth = 6, 
-                    subsample = 0.5, init = mean(y)) {
+ladboost <- function(X, y, ntree = 100, shrinkage = 0.1, depth = 6, 
+                     subsample = 0.5, init = median(y)) {
   yhat <- rep(init, times = nrow(X))  # initialize fit
   trees <- vector("list", length = ntree)  # to store each tree
   ctrl <- rpart::rpart.control(cp = 0, maxdepth = depth, minbucket = 10)
   for (tree in seq_len(ntree)) {
     id <- sample.int(nrow(X), size = floor(subsample * nrow(X)))
     samp <- X[id, ]
-    samp$pr <- y[id] - yhat[id]
+    samp$pr <- sign(y[id] - yhat[id])  # use signed residual
     trees[[tree]] <- 
       rpart::rpart(pr ~ ., data = samp, control = ctrl)
+    #---------------------------------------------------------------------------
+    # Line search; update terminal node estimates using median 
+    where <- trees[[tree]]$where  # terminal node assignments
+    map <- tapply(samp$pr, INDEX = where, FUN = median)  # terminal node medians
+    trees[[tree]]$frame$yval[where] <- map[as.character(where)]
+    # trees[[tree]] <- partykit::as.party(trees[[tree]])
+    # med <- function(y, w) median(y)
+    # yhat <- yhat + shrinkage * partykit::predict.party(trees[[tree]], newdata = X, FUN = med)
+    #---------------------------------------------------------------------------
     yhat <- yhat + shrinkage * predict(trees[[tree]], newdata = X)
   }
   res <- list("trees" = trees, "shrinkage" = shrinkage, "depth" = depth,
               "subsample" = subsample, "init" = init)
-  class(res) <- "lsboost"
+  class(res) <- "ladboost"
   res
 }
 
 
-#' Print method for \code{lsboost} objects
+#' Print method for \code{ladboost} objects
 #' 
-#' Print basic information about a fitted \code{"lsboost"} object.
+#' Print basic information about a fitted \code{"ladboost"} object.
 #' 
-#' @param x An object of class \code{"lsboost"}.
+#' @param x An object of class \code{"ladboost"}.
 #' 
 #' @param ... Additional optional arguments. (Currently ignored.)
 #'
-#' @rdname lsboost
+#' @rdname ladboost
 #' 
 #' @export
-print.lsboost <- function(x, ...) {
-  cat("Gradient tree boosting with least squares (LS) loss", "\n\n")
+print.ladboost <- function(x, ...) {
+  cat("Gradient tree boosting with least absolute deviation (LAD) loss", "\n\n")
   cat("            Initial fit:", x$init[1L], "\n")
   cat("        Number of trees:", length(x$trees), "\n")
   cat("Shrinkage/learning rate:", x$shrinkage, "\n")
@@ -91,11 +102,11 @@ print.lsboost <- function(x, ...) {
 }
 
 
-#' Predict method for \code{lsboost} objects
+#' Predict method for \code{ladboost} objects
 #' 
-#' Compute predictions from an \code{"lsboost"} object using new data.
+#' Compute predictions from an \code{"ladboost"} object using new data.
 #' 
-#' @param object An object of class \code{"lsboost"}.
+#' @param object An object of class \code{"ladboost"}.
 #' 
 #' @param newdata Data frame of new observations for making predictions.
 #' 
@@ -111,11 +122,11 @@ print.lsboost <- function(x, ...) {
 #' @return A vector (\code{individual = TRUE}) or matrix 
 #' (\code{individual = FALSE}) of predictions.
 #'
-#' @rdname lsboost
+#' @rdname ladboost
 #' 
 #' @export
-predict.lsboost <- function(object, newdata, ntree = NULL, 
-                            individual = FALSE, ...) {
+predict.ladboost <- function(object, newdata, ntree = NULL, 
+                             individual = FALSE, ...) {
   if (is.null(ntree)) {
     ntree <- length(object[["trees"]])
   }
@@ -123,6 +134,8 @@ predict.lsboost <- function(object, newdata, ntree = NULL,
   trees <- object[["trees"]][seq_len(ntree)]
   pmat <- sapply(trees, FUN = function(tree) {
     shrinkage * predict(tree, newdata = newdata)
+    # med <- function(y, w) median(y)
+    # shrinkage * partykit::predict.party(tree, newdata = newdata, FUN = med)
   })
   if (isTRUE(individual)) {
     pmat

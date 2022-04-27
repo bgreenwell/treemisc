@@ -1,8 +1,8 @@
 #' Importance sampled learning ensemble
 #' 
-#' Use the LASSO (Least Absolute Shrinkage and Selection Operator) to 
-#' post-process the predictions from the individual trees of a tree-based 
-#' ensemble (e.g., a random forest or gradient boosted tree ensemble).
+#' Uses \code{\link[glmnet]{glmnet}} or \code{\link[glmnet]{cv.glmnet}} to fit 
+#' the entire LASSO path for post-processing the individual trees of a 
+#' tree-based ensemble (e.g., a random forest).
 #' 
 #' @param X A matrix of training predictions, one column for each tree in the
 #' ensemble.
@@ -49,7 +49,7 @@
 #' }
 #' 
 #' @export
-isle.post <- function(X, y, newX = NULL, newy = NULL, cv = FALSE, nfolds = 5, 
+isle_post <- function(X, y, newX = NULL, newy = NULL, cv = FALSE, nfolds = 5, 
                       family = NULL, loss = "default", offset = NULL, ...) {
   
   # TODO: Add better checks (e.g., user needs to supply test set or use CV).
@@ -76,9 +76,8 @@ isle.post <- function(X, y, newX = NULL, newy = NULL, cv = FALSE, nfolds = 5,
                       "lambda" = fit$lambda)
     names(res)[names(res) == "error"] <- names(fit$name)
   } else {  # use an independent test set
-    fit <- glmnet::glmnet(X, y = y, intercept = TRUE, lower.limits = 0, 
-                          standardize = FALSE, offset = offset, family = family, 
-                          ...)
+    fit <- glmnet::glmnet(X, y = y, lower.limits = 0, standardize = FALSE, 
+                          offset = offset, family = family, ...)
     # Assess performance of fit using an independent test set
     perf <- glmnet::assess.glmnet(fit, newx = newX, newy = newy, 
                                  family = family, newoffset = offset)

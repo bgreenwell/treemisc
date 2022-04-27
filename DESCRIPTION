@@ -1,27 +1,33 @@
 Package: treemisc
 Type: Package
-Title: Data Sets and Functions to Accompany Tree-Based Methods and their Application in R (forthcoming)
+Title: Data Sets and Functions to Accompany "Tree-Based Methods for Statistical 
+    Learning in R"
 Version: 0.0.1
-Authors@R: person("Brandon", "Greenwell", email = "greenwell.brandon@gmail.com", role =
-         c("aut", "cre"), comment = c(ORCID = "0000-0002-8120-0084"))
-Description: Miscellaneous data sets and functions to accompany 'Tree-based methods and their application in R.'
+Authors@R: person(c("Brandon", "M."), family = "Greenwell", 
+    email = "greenwell.brandon@gmail.com", 
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0002-8120-0084"))
+Description: Miscellaneous data sets and functions to accompany 'Tree-based 
+    methods and their application in R.'
 License: GPL (>= 2)
 Depends: R (>= 4.0.0)
 Imports: 
     Matrix, 
     Rcpp (>= 1.0.1),
-    stats
+    rpart,
+    rpart.plot,
+    stats,
+    utils
 Suggests: 
     AmesHousing,
+    gbm,
     glmnet (>= 3.0),
     graphics,
     party,
     partykit,
     randomForest,
     ranger, 
-    rpart,
     tinytest
 LinkingTo: Rcpp
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 LazyData: TRUE
 Encoding: UTF-8

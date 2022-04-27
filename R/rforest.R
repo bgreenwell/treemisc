@@ -31,7 +31,6 @@ suppressRegressionWarning <- function(expr) {
 #' @param ... Optional arguments to be passed on to 
 #' \code{\link[randomForest]{randomForest}}.
 #' 
-#' 
 #' @keywords internal
 rftree <- function(X, y, rotate = FALSE, ...) {
   if (isTRUE(rotate)) {
@@ -47,13 +46,14 @@ rftree <- function(X, y, rotate = FALSE, ...) {
   # nodesize <- if (is.factor(y)) 10 else 5
   suppressRegressionWarning(
     tree <- randomForest::randomForest(X, y = y, ntree = 1, #nodesize = nodesize, 
-                                     ...)
+                                       ...)
   )
-  class(tree) <- c("rftree", class(tree))
   if (isTRUE(rotate)) {
     attr(tree, which = "rotation.matrix") <- R
   }
-  tree
+  res <- list("description" = "A single `randomForest()` tree", "rfo" = tree)
+  class(res) <- c("rftree", class(tree))
+  res
 }
 
 
@@ -76,12 +76,13 @@ predict.rftree <- function(object, newX) {
     nX <- data.matrix(newX)[, numeric.cols]  # numeric cols of X only
     newX[, numeric.cols] <- nX %*% R
   }
-  if (object$type == "classification") {
-    randomForest:::predict.randomForest(object, newdata = newX, type = "prob")
-    # predict(object, newdata = newX)
+  rfo <- object[["rfo"]]  # grab `randomForest` object
+  if (rfo[["type"]] == "classification") {
+    # randomForest:::predict.randomForest(object, newdata = newX, type = "prob")
+    predict(rfo, newdata = newX, type = "prob")
   } else {
-    randomForest:::predict.randomForest(object, newdata = newX, type = "response")
-    # predict(object, newdata = newX)
+    # randomForest:::predict.randomForest(object, newdata = newX, type = "response")
+    predict(rfo, newdata = newX, type = "response")
   }
 }
 
@@ -120,7 +121,7 @@ predict.rftree <- function(object, newX) {
 #' Rico Blaser and Piotr Fryzlewicz. Random rotation ensembles. Journal of 
 #' Machine Learning Research, 17:1–26, 2016.
 rforest <- function(X, y, mtry = NULL, ntree = 500, rotate = FALSE, ...) {
-  if (!requireNamespace("reticulate", quietly = TRUE)) {
+  if (!requireNamespace("randomForest", quietly = TRUE)) {
     stop("Package \"randomForest\" needed for this function to work. Please ",
          "install it.", call. = FALSE)
   }
@@ -163,6 +164,7 @@ rforest <- function(X, y, mtry = NULL, ntree = 500, rotate = FALSE, ...) {
 #' @export
 predict.rforest <- function(object, newX, predict.all = FALSE, ...) {
   p <- lapply(object, FUN = function(tree) {
+    # predict.rftree(tree, newX = newX)
     predict.rftree(tree, newX = newX)
   })
   p <- do.call(cbind, args = p)

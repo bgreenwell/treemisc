@@ -1,7 +1,7 @@
 #' Generate GUIDE input files
 #' 
 #' Just a simple helper function I found useful while using the GUIDE terminal 
-#' appplication (http://pages.stat.wisc.edu/~loh/guide.html). It creates two 
+#' application (http://pages.stat.wisc.edu/~loh/guide.html). It creates two 
 #' input text files required by GUIDE: a data file and description file.
 #'   
 #' @param data A data frame containing the training data.
@@ -37,21 +37,25 @@
 #' \url{http://pages.stat.wisc.edu/~loh/treeprogs/guide/guideman.pdf}. This 
 #' function has only been tested on GUIDE v38.0.
 #' 
+#' @importFrom utils write.csv
+#' 
 #' @export
 #' 
 #' @examples 
+#' \dontrun{
 #' # New York air quality measurements
 #' aq <- airquality
 #' aq <- aq[!is.na(aq$Ozone), ]  # remove rows with missing response values
 #' 
 #' # Default variable roles
-#' guide.setup(aq, path = "some/path/aq", dv = "Ozone")
+#' guide_setup(aq, path = "some/path/aq", dv = "Ozone")
 #' 
 #' # User specified variable roles
 #' var.roles <- c("Ozone" = "d", "Solar.R" = "n", "Wind" = "n", "Temp" = "c",
 #'                "Month" = "p", "Day" = "p")
-#' guide.setup(aq, path = "some/path/aq", var.roles = var.roles)
-guide.setup <- function(data, path, dv = NULL, var.roles = NULL, na = "NA", 
+#' guide_setup(aq, path = "some/path/aq", var.roles = var.roles)
+#' }
+guide_setup <- function(data, path, dv = NULL, var.roles = NULL, na = "NA", 
                         file.name = NULL, data.loc = NULL, verbose = FALSE) {
   
   # FIXME: What about file names and NA flags with non-alphanumeric characters?

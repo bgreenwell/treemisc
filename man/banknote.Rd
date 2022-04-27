@@ -23,8 +23,8 @@ Measurements from 200 Swiss 1000-franc banknotes: 100 genuine and 100 counterfei
 \item{bottom}{The length of the botttom edge in mm.}
 \item{top}{The length of the top edge in mm.}
 \item{diagonal}{The length of the diagonal in mm.}
-\item{class}{Integer specifying whether or not the bill was genuine
-(\code{class = 0}) or counterfeit (\code{class = 1}).}
+\item{y}{Integer specifying whether or not the bill was genuine
+(\code{y = 0}) or counterfeit (\code{y = 1}).}
 
 }
 }
