@@ -21,7 +21,8 @@
 #'   \item{\code{"ns"}}{Natural (i.e., restricted) cubic splines; essentially,
 #'   a spline-based nonparametric version of Pratt scaling.}
 #'   
-#'   \item{\code{"binned"}}{TBD.}
+#'   \item{\code{"binned"}}{Use binning to discretize the probabilities into 
+#'   bins (i.e., no model).}
 #'
 #' }
 #'
@@ -37,7 +38,7 @@
 #' Harrel (2015, pp. 26-28) for details.
 #' 
 #' @param nbins Integer specifying the number of bins to use for grouping the
-#' probabilities.
+#' probabilities; only used if \code{method = "binned"}.
 #' 
 #' @param refline Logical indicating whether or not to include a reference line.
 #'

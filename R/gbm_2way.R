@@ -12,6 +12,14 @@
 #' 
 #' @param n.trees Integer specifying the number of trees to use.
 #' 
+#' @returns A data frame with the following three columns:
+#' \describe{ 
+#'   \item{var1}{The name of the first feature.} 
+#'   \item{var2}{The name of the second feature.} 
+#'   \item{h}{The corresponding H-statistic.} 
+#' }
+#' The resulting rows are sorted in descending order of \code{h}.
+#' 
 #' @references 
 #' Friedman, J. H., & Popescu, B. E. (2008). Predictive Learning via Rule 
 #' Ensembles. The Annals of Applied Statistics, 2(3), 916–954. 

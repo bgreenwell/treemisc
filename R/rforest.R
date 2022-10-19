@@ -17,12 +17,12 @@ suppressRegressionWarning <- function(expr) {
 
 #' Random forest tree
 #' 
-#' Fits a single random forest tree.
+#' Fits a single \code{\link[randomForest]{randomForest}} tree.
 #' 
 #' @param X A data frame or a matrix of predictors.
 #' 
 #' @param y Numeric vector of response value. For binary outcomes, \code{y} 
-#' should be mapped to {0, 1}. Note that multiclass outcomes are not supported.
+#' should be mapped to \{0, 1\}. Note that multiclass outcomes are not supported.
 #' 
 #' @param rotate Logical indicating whether or not to randomly rotate the 
 #' feature values prior to fitting the tree. Default is \code{FALSE} which
@@ -65,6 +65,9 @@ rftree <- function(X, y, rotate = FALSE, ...) {
 #' 
 #' @param newX Data frame or matrix of new feature values.
 #' 
+#' @returns Has the same return type as 
+#' \code{\link[randomForest]{predict.randomForest}}.
+#' 
 #' @keywords internal
 predict.rftree <- function(object, newX) {
   if (!is.null(R <- attr(object, which = "rotation.matrix"))) {
@@ -95,7 +98,7 @@ predict.rftree <- function(object, newX) {
 #' @param X A data frame or a matrix of predictors.
 #' 
 #' @param y Numeric vector of response value. For binary outcomes, \code{y} 
-#' should be mapped to {0, 1}. Note that multiclass outcomes are not supported.
+#' should be mapped to \{0, 1\}. Note that multiclass outcomes are not supported.
 #' 
 #' @param mtry Integer specifying the number of variables randomly sampled as 
 #' candidates splitters at each node in a tree. Note that the default values are 
@@ -112,6 +115,9 @@ predict.rftree <- function(object, newX) {
 #' 
 #' @param ... Optional arguments to be passed on to 
 #' \code{\link[randomForest]{randomForest}} (e.g., \code{nodesize = 10}).
+#' 
+#' @returns An object of class \code{"rforest"}, which is essentially a list of
+#' \link{rftree} objects.
 #' 
 #' @export
 #' 

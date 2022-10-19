@@ -1,4 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^cran-comments\.txt$
 ^data-raw$
 ^README\.Rmd$

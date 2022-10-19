@@ -11,6 +11,10 @@
 
 \item{newX}{Data frame or matrix of new feature values.}
 }
+\value{
+Has the same return type as 
+\code{\link[randomForest]{predict.randomForest}}.
+}
 \description{
 Compute predictions from an \code{"rftree"} object.
 }

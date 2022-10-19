@@ -1,0 +1,7 @@
+Dear CRAN Maintainers,
+
+Thank you for taking the time to check and host this package in CRAN. This is a lightweight package containing data sets and functions to support my new book "Tree-Based Methods for Statistical Learning in R." This version passes all checks on all major OS without any errors or warnings; just a note regarding that the package is new. Thanks again for your time and considerations.
+
+Best,
+
+Brandon Greenwell

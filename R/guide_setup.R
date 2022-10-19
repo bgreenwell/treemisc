@@ -30,6 +30,9 @@
 #' @param verbose Logical indicating whether or not to print progress 
 #' information.
 #' 
+#' @returns No return value, only called for side effects; in this case, two
+#' text file are created for consumption by the GUIDE terminal application
+#' 
 #' @note 
 #' This function assumes that the GUIDE executable is located in the same 
 #' directory specified by the `path` argument. For details, see the official 

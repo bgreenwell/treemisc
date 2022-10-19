@@ -10,7 +10,7 @@ rforest(X, y, mtry = NULL, ntree = 500, rotate = FALSE, ...)
 \item{X}{A data frame or a matrix of predictors.}
 
 \item{y}{Numeric vector of response value. For binary outcomes, \code{y} 
-should be mapped to {0, 1}. Note that multiclass outcomes are not supported.}
+should be mapped to \{0, 1\}. Note that multiclass outcomes are not supported.}
 
 \item{mtry}{Integer specifying the number of variables randomly sampled as 
 candidates splitters at each node in a tree. Note that the default values are 
@@ -27,6 +27,10 @@ results in a traditional random forest.}
 
 \item{...}{Optional arguments to be passed on to 
 \code{\link[randomForest]{randomForest}} (e.g., \code{nodesize = 10}).}
+}
+\value{
+An object of class \code{"rforest"}, which is essentially a list of
+\link{rftree} objects.
 }
 \description{
 A poor man's implementation of random forest (Breiman, 2001) with the option

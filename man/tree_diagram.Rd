@@ -18,6 +18,11 @@ coloring the nodes; see \code{\link[rpart.plot]{rpart.plot}} for details.}
 \item{...}{Additional optional argumebts to be passed onto 
 \code{\link[rpart.plot]{rpart.plot}}.}
 }
+\value{
+No return value, only called for side effects; in this case, a 
+decision tree diagram constructed by a simple call to 
+\code{\link[rpart.plot]{rpart.plot}}.
+}
 \description{
 Draw a decision tree diagram from a fitted \code{\link[rpart]{rpart}} model.
 }

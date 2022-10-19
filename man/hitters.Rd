@@ -48,7 +48,7 @@ plot(log(Salary) ~ Years, data = hitters)
 \references{
 James, G., Witten, D., Hastie, T., and Tibshirani, R. (2013)
 \emph{An Introduction to Statistical Learning with applications in R},
-\url{www.StatLearning.com}, Springer-Verlag, New York.
+\url{https://www.statlearning.com}, Springer-Verlag, New York.
 
 Hoaglin, D. C. and Velleman, P. F. (1995). 
 \emph{A critical look at some analyses ofmajor league baseball salaries}.

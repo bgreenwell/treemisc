@@ -16,6 +16,10 @@ Default is 10. Note that \code{nx >= 5}.}
 \item{sigma}{Numeric specifying the standard deviation of the standard 
 Gaussian noise.}
 }
+\value{
+A data frame with \code{n} rows and \code{nx} + 1 columns (for
+\code{nx} features and the response).
+}
 \description{
 Simulate data from the Friedman 1 benchmark problem. See
 \code{\link[mlbench]{mlbench.friedman1}} for details and references.

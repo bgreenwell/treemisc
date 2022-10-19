@@ -1,3 +1,14 @@
+# Exits
+if (!requireNamespace("AmesHousing", quietly = TRUE)) {
+  exit_file("Package 'AmesHousing' missing.")
+}
+if (!requireNamespace("Matrix", quietly = TRUE)) {
+  exit_file("Package 'Matrix' missing.")
+}
+if (!requireNamespace("ranger", quietly = TRUE)) {
+  exit_file("Package 'ranger' missing.")
+}
+
 # Load required packages
 library(Matrix)
 library(ranger)
@@ -18,8 +29,7 @@ system.time(
 format(object.size(ames_prox), units = "MB")
 
 # Visualize proximities
-image(ames_prox)
+# image(ames_prox)
 
-
-mds <- stats::cmdscale(1 - ames_prox, eig = TRUE, k = 2)
-plot(mds$points)
+# mds <- stats::cmdscale(1 - ames_prox, eig = TRUE, k = 2)
+# plot(mds$points)

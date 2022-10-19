@@ -26,12 +26,15 @@
 #' @param refline Logical indicating whether or not to include a reference line.
 #'
 #' @param refline.col The color to use for the reference line. Default is
-#' \code{"red"}.
+#' \code{2}.
+#' 
+#' @param refline.fill The color to use for filling in the polygon-shaped 
+#' reference line. Default is \code{2}.
 #'
 #' @param refline.lty The type of line to use for the reference line. Default is
 #' \code{"dashed"}.
 #'
-#' @param refline.lwd The width of the reference line. Default is 1.
+#' @param refline.lwd The width of the reference line. Default is \code{1}.
 #'
 #' @param x An object of class \code{"lift"}.
 #'
@@ -88,14 +91,14 @@ lift <- function(prob, y, pos.class = NULL, cumulative = TRUE, nbins = 0) {
 #' @rdname lift
 #'
 #' @export
-plot.lift <- function(x, refline = TRUE, refline.col = 2, 
+plot.lift <- function(x, refline = TRUE, refline.col = 2, refline.fill = 2,
                       refline.lty = "dashed", refline.lwd = 1, ...) {
   if (isTRUE(x[["cumulative"]])) {
     plot(x[["prop"]], x[["lift"]], type = "l", xlab = "Proportion of cases",
          ylab = "Cumulative lift", ...)
     if (isTRUE(refline)) {
       maxy <- sum(x$y)
-      polygon(c(0, mean(x$y), 1), c(0, maxy, maxy), col = refline.col)
+      polygon(c(0, mean(x$y), 1), c(0, maxy, maxy), border = refline.col)
       #abline(0, 1, col = refline.col, lty = refline.lty,
       #       lwd = refline.lwd)
       legend("bottomright", legend = "Baseline", lty = 2, col = refline.col,

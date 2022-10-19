@@ -45,7 +45,8 @@ Current options include:
   \item{\code{"ns"}}{Natural (i.e., restricted) cubic splines; essentially,
   a spline-based nonparametric version of Pratt scaling.}
   
-  \item{\code{"binned"}}{TBD.}
+  \item{\code{"binned"}}{Use binning to discretize the probabilities into 
+  bins (i.e., no model).}
 
 }}
 
@@ -61,7 +62,7 @@ corresponds to a good choice based on four knots; see
 Harrel (2015, pp. 26-28) for details.}
 
 \item{nbins}{Integer specifying the number of bins to use for grouping the
-probabilities.}
+probabilities; only used if \code{method = "binned"}.}
 
 \item{x}{An object of class \code{"calibrate"}.}
 

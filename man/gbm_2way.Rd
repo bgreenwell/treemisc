@@ -16,6 +16,15 @@ representative sample thereof).}
 
 \item{n.trees}{Integer specifying the number of trees to use.}
 }
+\value{
+A data frame with the following three columns:
+\describe{ 
+  \item{var1}{The name of the first feature.} 
+  \item{var2}{The name of the second feature.} 
+  \item{h}{The corresponding H-statistic.} 
+}
+The resulting rows are sorted in descending order of \code{h}.
+}
 \description{
 Computes Friedman's H-statistic (Friedman & Popescu, 2008) for all pairwise 
 interaction effects in a \code{\link[gbm]{gbm}} model.

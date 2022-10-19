@@ -4,9 +4,9 @@
 #' assignments (one row for each observation and one column for each tree in the 
 #' forest).
 #' 
-#' @param x Either a \code{\link[ranger]{ranger}} object or a matrix of matrix 
-#' of terminal node assignments (one row for each observation and one column for 
-#' each tree in the forest).
+#' @param x Either a \code{\link[ranger]{ranger}} object or a matrix of terminal 
+#' node assignments (one row for each observation and one column for each tree 
+#' in the forest).
 #' 
 #' @param data Optional data frame passed on to 
 #' \code{\link[ranger]{predict.ranger}}. It's a good idea to pass the data via 
@@ -22,6 +22,9 @@
 #' Default is \code{TRUE}.
 #' 
 #' @param ... Additional optional argument. (Currently ignored.)
+#' 
+#' @returns A matrix or sparse Matrix (\code{sparse = TRUE}) of pairwise 
+#' proximity (i.e., similarity) scores between training observations.
 #' 
 #' @useDynLib treemisc, .registration = TRUE
 #' 

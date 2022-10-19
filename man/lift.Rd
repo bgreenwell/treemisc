@@ -11,6 +11,7 @@ lift(prob, y, pos.class = NULL, cumulative = TRUE, nbins = 0)
   x,
   refline = TRUE,
   refline.col = 2,
+  refline.fill = 2,
   refline.lty = "dashed",
   refline.lwd = 1,
   ...
@@ -42,12 +43,15 @@ sorted probabilities.}
 \item{refline}{Logical indicating whether or not to include a reference line.}
 
 \item{refline.col}{The color to use for the reference line. Default is
-\code{"red"}.}
+\code{2}.}
+
+\item{refline.fill}{The color to use for filling in the polygon-shaped 
+reference line. Default is \code{2}.}
 
 \item{refline.lty}{The type of line to use for the reference line. Default is
 \code{"dashed"}.}
 
-\item{refline.lwd}{The width of the reference line. Default is 1.}
+\item{refline.lwd}{The width of the reference line. Default is \code{1}.}
 
 \item{...}{Additional optional argument to be passed on to other methods.}
 }

@@ -13,12 +13,21 @@
 #' @param ... Additional optional argumebts to be passed onto 
 #' \code{\link[rpart.plot]{rpart.plot}}.
 #' 
+#' @returns No return value, only called for side effects; in this case, a 
+#' decision tree diagram constructed by a simple call to 
+#' \code{\link[rpart.plot]{rpart.plot}}.
+#' 
 #' @note This function is just a light wrapper around 
 #' \code{\link[rpart.plot]{rpart.plot}} and was used to produce several of the
 #' tree diagrams in the accompanying book.
 #' 
 #' @export
 tree_diagram <- function(object, prob = TRUE, box.palette = "BuOr", ...) {
+  # Check for dependency
+  if (!requireNamespace("rpart.plot", quietly = TRUE)) {
+    stop("The \"rpart.plot\" package is required for this function to work. ",
+         "Please install it from CRAN.", call. = FALSE)
+  }
   extra <- if (object$method == "class") {
     if (isTRUE(prob)) 104 else 101
   } else {

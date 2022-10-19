@@ -16,9 +16,9 @@ proximity(x, ...)
 \method{proximity}{ranger}(x, data = NULL, sparse = NULL, upper = TRUE, ...)
 }
 \arguments{
-\item{x}{Either a \code{\link[ranger]{ranger}} object or a matrix of matrix 
-of terminal node assignments (one row for each observation and one column for 
-each tree in the forest).}
+\item{x}{Either a \code{\link[ranger]{ranger}} object or a matrix of terminal 
+node assignments (one row for each observation and one column for each tree 
+in the forest).}
 
 \item{...}{Additional optional argument. (Currently ignored.)}
 
@@ -34,6 +34,10 @@ Default is \code{TRUE}.}
 \code{\link[ranger]{predict.ranger}}. It's a good idea to pass the data via 
 this argument whenever \code{x} is a \code{\link[ranger]{ranger}} object. If
 \code{NULL} (the default) it will be looked for recursively.}
+}
+\value{
+A matrix or sparse Matrix (\code{sparse = TRUE}) of pairwise 
+proximity (i.e., similarity) scores between training observations.
 }
 \description{
 Compute proximity matrix from a random forest or matrix of terminal node

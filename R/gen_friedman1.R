@@ -11,6 +11,9 @@
 #'
 #' @param sigma Numeric specifying the standard deviation of the standard 
 #' Gaussian noise.
+#' 
+#' @returns A data frame with \code{n} rows and \code{nx} + 1 columns (for
+#' \code{nx} features and the response).
 #'
 #' @export
 #'

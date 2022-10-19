@@ -10,7 +10,7 @@ rftree(X, y, rotate = FALSE, ...)
 \item{X}{A data frame or a matrix of predictors.}
 
 \item{y}{Numeric vector of response value. For binary outcomes, \code{y} 
-should be mapped to {0, 1}. Note that multiclass outcomes are not supported.}
+should be mapped to \{0, 1\}. Note that multiclass outcomes are not supported.}
 
 \item{rotate}{Logical indicating whether or not to randomly rotate the 
 feature values prior to fitting the tree. Default is \code{FALSE} which
@@ -20,6 +20,6 @@ results in a traditional random forest tree.}
 \code{\link[randomForest]{randomForest}}.}
 }
 \description{
-Fits a single random forest tree.
+Fits a single \code{\link[randomForest]{randomForest}} tree.
 }
 \keyword{internal}

@@ -42,6 +42,10 @@ not reside in the same directory as the GUIDE executable.}
 \item{verbose}{Logical indicating whether or not to print progress 
 information.}
 }
+\value{
+No return value, only called for side effects; in this case, two
+text file are created for consumption by the GUIDE terminal application
+}
 \description{
 Just a simple helper function I found useful while using the GUIDE terminal 
 application (http://pages.stat.wisc.edu/~loh/guide.html). It creates two 

@@ -17,7 +17,7 @@
 #' that corresponds to the y-axis.
 #' 
 #' @param pfun Optional prediction wrapper that returns a vector of predicted
-#' predicted class labels. It must have exactly two arguments: \code{object} and
+#' class labels. It must have exactly two arguments: \code{object} and
 #' \code{newdata}.
 #' 
 #' @param grid.resolution Integer specifying the resolution of the contour plot.
@@ -25,6 +25,10 @@
 #' 
 #' @param ... Additional optional arguments to be passed on to 
 #' \code{\link[graphics]{contour}}.
+#' 
+#' @returns No return value, only called for side effects; in this case, a 
+#' contour displaying the decision boundary of a classifier is added to an
+#' existing scatterplot.
 #' 
 #' @note Based on a function written by Michael Hahsler; see
 #' https://michael.hahsler.net/SMU/EMIS7332/R/viz_classifier.html.
@@ -38,6 +42,29 @@
 #' @rdname decision_boundary
 #' 
 #' @export
+#' 
+#' @examples 
+#' \dontrun{
+#' library(mlbench)
+#' library(rpart)
+#' library(treemisc)
+#' 
+#' # Generate training data from the twonorm benchmark problem
+#' set.seed(1050)  # for reproducibility
+#' trn <- as.data.frame(mlbench.twonorm(500, d = 2))
+#' 
+#' # Fit a default classification tree
+#' tree <- rpart(classes ~ ., data = trn)
+#' 
+#' # Scatterplot of training data
+#' palette("Okabe-Ito")
+#' plot(x.2 ~ x.1, data = trn, col = as.integer(trn$classes) + 1,
+#'      xlab = expression(x[1]), ylab = expression(x[2]))
+#' palette("default")
+#' 
+#' # Add a decision boundary
+#' decision_boundary(tree, train = trn, y = "y", x1 = "x.1", x2 = "x.2")
+#' }
 decision_boundary <- function(model, train, y, x1, x2, pfun, 
                               grid.resolution = 100, ...) {
   UseMethod("decision_boundary")
