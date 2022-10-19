@@ -9,7 +9,7 @@
 status](https://www.r-pkg.org/badges/version/treemisc)](https://CRAN.R-project.org/package=treemisc)
 <!-- badges: end -->
 
-Data Sets and Functions to Accompany [“Tree-Based Methods for
+Data sets and functions to accompany [“Tree-Based Methods for
 Statistical Learning in
 R”](https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468).
 For more details, visit the [book’s companion
